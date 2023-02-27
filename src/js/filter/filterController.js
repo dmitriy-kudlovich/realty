@@ -6,8 +6,7 @@ export default async function (state) {
     state.filterModel = new FilterModel();
   }
   await state.filterModel.getParams();
-  await state.filterModel.getObjects();
-
+  state.results = await state.filterModel.getObjects();
   View.render(state);
 
   const form = document.getElementById("formFilter");
@@ -18,17 +17,19 @@ export default async function (state) {
     state.filterModel.query = View.getInput();
     let objects = await state.filterModel.getObjects();
     View.showObjectsAmount(objects);
+    state.results = objects;
   });
 
   form.addEventListener("reset", async () => {
     state.filterModel.query = "";
     let objects = await state.filterModel.getObjects();
+
     View.showObjectsAmount(objects);
   });
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-
-    console.log("Submit");
+    state.emitter.emit("event:render-listing", {});
+    state.results = await state.filterModel.getObjects();
   });
 }

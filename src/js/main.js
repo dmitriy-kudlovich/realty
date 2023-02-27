@@ -3,10 +3,13 @@ import bidsPage from "./pages/bidsPage";
 import favouritesPage from "./pages/favouritesPage";
 import singleItemPage from "./pages/singleItemPage";
 import errorPage from "./pages/errorPage";
+import EventEmitter from "./utils/eventEmitter";
 
-const state = {};
+const state = {
+  results: [],
+  emitter: new EventEmitter(),
+};
 
-//Test. To remove
 window.state = state;
 
 const routerPages = [
