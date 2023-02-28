@@ -1,4 +1,5 @@
+import controller from "../singleItem/singleItemController";
+
 export default function () {
-    document.querySelector("#app").innerHTML = "SinglePage";
-  }
-  
+  controller(state);
+}

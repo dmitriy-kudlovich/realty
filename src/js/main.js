@@ -31,6 +31,8 @@ function router() {
   let currentPath = arrPath[0] === "" ? "/" : arrPath[1];
   currentPath = currentPath === "" ? "/" : currentPath;
 
+  state.routeParams = arrPath[2] ? arrPath[2] : "";
+
   let { path, component } = getCurrentPage(currentPath) || {
     path: "error",
     component: errorPage,

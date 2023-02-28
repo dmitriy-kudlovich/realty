@@ -17,7 +17,7 @@ export function renderCards(state) {
   state.results.forEach((card) => {
     cardMarkup += `<article class="col-md-4">
                         <!-- card -->
-                        <a href="object.html" class="card">
+                        <a href="#/singleItem/${card.id}" class="card">
                             <div class="card__header">
                                 <div class="card__title">
                                     ${card.complex_name}
@@ -32,10 +32,14 @@ export function renderCards(state) {
                             <div class="card__desc">
                                 <div class="card__price">
                                     <div class="card__price-total">
-                                        ${card.price_total} ₽
+                                        ${new Intl.NumberFormat("ru-RU").format(
+                                          card.price_total
+                                        )} ₽
                                     </div>
                                     <div class="card__price-per-meter">
-                                        ${card.price_sq_m} ₽/м2
+                                        ${new Intl.NumberFormat("ru-RU").format(
+                                          card.price_sq_m
+                                        )} ₽/м2
                                     </div>
                                 </div>
 
@@ -45,20 +49,26 @@ export function renderCards(state) {
                                         <div class="params__definition">
                                             Комнат
                                         </div>
-                                        <div class="params__value">${card.rooms}</div>
+                                        <div class="params__value">${
+                                          card.rooms
+                                        }</div>
                                     </div>
                                     <div class="params__item">
                                         <div class="params__definition">
                                             Площадь
                                         </div>
-                                        <div class="params__value">${card.square}</div>
+                                        <div class="params__value">${
+                                          card.square
+                                        }</div>
                                     </div>
                                 </div>
                                 <!-- //card__params params -->
                             </div>
                             <div class="card__footer">
                                 <div class="card__art">${card.scu}</div>
-                                <div class="card__floor">Этаж ${card.floor} из ${card.floors_total}</div>
+                                <div class="card__floor">Этаж ${
+                                  card.floor
+                                } из ${card.floors_total}</div>
                             </div>
                         </a>
                         <!-- // card -->
