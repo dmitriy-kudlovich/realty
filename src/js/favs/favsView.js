@@ -1,20 +1,50 @@
-export function listingRender(state) {
-  const markup = `<div class="cards-wrapper">
-                    <div class="container p-0">
-                        <!-- row -->
-                        <div class="row pt-5" id="cardsRow">
-                        </div>
-                        <!-- // row -->
-                    </div>
-                </div>`;
+export function render() {
+  const markup = `<div class="container p-0">
+                    <div class="heading-1">Избранное</div>
+                </div>
 
-  document.getElementById("app").insertAdjacentHTML("beforeend", markup);
+                <div class="view-options-wrapper">
+                    <div class="container p-0">
+                        <!-- view-options -->
+                        <div class="view-options">
+                            <div class="view-options__sort">
+                                <label
+                                    for="sort-cards-by"
+                                    class="view-options__label"
+                                    >Сортировать</label
+                                >
+                                <select
+                                    id="sort-cards-by"
+                                    name=""
+                                    id=""
+                                    class="view-options__select"
+                                >
+                                    <option value="">по цене ↑</option>
+                                    <option value="">по цене ↓</option>
+                                    <option value="">по площади ↑</option>
+                                    <option value="">по площади ↓</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- // view-options -->
+                    </div>
+                </div>
+
+                <div class="cards-wrapper">
+                    <div class="container p-0">
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+    `;
+
+  document.querySelector("#app").innerHTML = markup;
 }
 
-export function renderCards(state) {
+export function renderCards(data) {
   let cardMarkup = "";
-
-  state.results.forEach((card) => {
+  console.log(data);
+  data.forEach((card) => {
     cardMarkup += `<article class="col-md-4">
                         <!-- card -->
                         <a href="#/singleItem/${card.id}" class="card">
@@ -75,26 +105,5 @@ export function renderCards(state) {
                     </article>`;
   });
 
-  document.getElementById("cardsRow").innerHTML = cardMarkup;
-}
-
-export function cleanListingRow() {
-  document.getElementById("cardsRow").innerHTML = "";
-}
-
-export function displayFavItems(array) {
-  let cards = document.querySelectorAll(".card");
-
-  document.querySelectorAll(".card__like").forEach((cardHeartIcon) => {
-    cardHeartIcon.classList.remove("card__like--active");
-  });
-
-  cards.forEach((card) => {
-    for (let i = 0; i < array.length; i++) {
-      if (card.getAttribute("href").split("/")[2] === array[i]) {
-        card.querySelector(".card__like").classList.add("card__like--active");
-        break;
-      }
-    }
-  });
+  return cardMarkup;
 }

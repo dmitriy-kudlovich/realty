@@ -1,4 +1,5 @@
+import controller from "../favs/favsController";
+
 export default function () {
-    document.querySelector("#app").innerHTML = "Favourites";
-  }
-  
+  controller();
+}

@@ -1,6 +1,7 @@
 export default class FavsModel {
   constructor() {
     this.favs = this.getFromLocalStorage();
+    this.favsCards = [];
   }
 
   addFav(id) {
@@ -28,5 +29,18 @@ export default class FavsModel {
     }
 
     return [];
+  }
+
+  async getfavCards() {
+    try {
+      const favIds = await this.getFromLocalStorage().join(",");
+      const queryString = "https://jsproject.webcademy.ru/items?ids=" + favIds;
+      console.log(queryString);
+      const response = await fetch(queryString);
+      const data = await response.json();
+      this.favsCards = await data;
+    } catch (error) {
+      alert(error);
+    }
   }
 }
