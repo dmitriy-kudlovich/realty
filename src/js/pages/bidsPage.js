@@ -1,3 +1,5 @@
+import bidsController from "../bids/bidsController";
+
 export default function () {
-  document.querySelector("#app").innerHTML = "BidsPage";
+  bidsController();
 }

@@ -32,12 +32,6 @@ export function render(data) {
                                 <button class="button-favourite">
                                     <i class="fas fa-heart"></i> <span>В избранное</span>
                                 </button>
-
-                                <!-- В Избранном -->
-                                <button class="button-favourite button-favourite--active">
-                                    <i class="fas fa-heart"></i> <span>В избранном</span>
-                                </button>
-
                             </div>
 
                             <div class="object__desc-details">
@@ -243,4 +237,29 @@ function formValidate() {
 export function clearInput() {
   document.getElementById("formName").value = "";
   document.getElementById("formPhone").value = "";
+}
+
+export function toggleFav() {
+  document
+    .querySelector(".button-favourite")
+    .classList.toggle("button-favourite--active");
+
+  if (
+    document
+      .querySelector(".button-favourite")
+      .classList.contains("button-favourite--active")
+  ) {
+    document.querySelector(".button-favourite span").innerHTML = "В избранном";
+  } else {
+    document.querySelector(".button-favourite span").innerHTML = "В избранное";
+  }
+}
+
+export function displayFav(array, id) {
+  if (array.indexOf(id) != -1) {
+    document
+      .querySelector(".button-favourite")
+      .classList.add("button-favourite--active");
+    document.querySelector(".button-favourite span").innerHTML = "В избранном";
+  }
 }

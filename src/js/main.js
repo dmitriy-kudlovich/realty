@@ -4,10 +4,12 @@ import favouritesPage from "./pages/favouritesPage";
 import singleItemPage from "./pages/singleItemPage";
 import errorPage from "./pages/errorPage";
 import EventEmitter from "./utils/eventEmitter";
+import FavsModel from "./favs/favsModel";
 
 const state = {
   results: [],
   emitter: new EventEmitter(),
+  favs: new FavsModel(),
 };
 
 window.state = state;

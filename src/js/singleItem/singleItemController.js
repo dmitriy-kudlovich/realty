@@ -4,7 +4,9 @@ import * as view from "./singleItemView";
 export default async function (state) {
   state.singleItem = new Model(state.routeParams);
   await state.singleItem.getItem();
-  view.render(state.singleItem.result);
+  await view.render(state.singleItem.result);
+
+  view.displayFav(state.favs.favs, state.singleItem.id);
 
   document
     .querySelector(".button-order")
@@ -28,5 +30,17 @@ export default async function (state) {
       view.hideModal();
       view.clearInput();
     }
+  });
+
+  document.querySelector(".button-favourite").addEventListener("click", () => {
+    const id = state.singleItem.id;
+
+    if (state.favs.favs.indexOf(id) != -1) {
+      state.favs.removeFav(id);
+    } else {
+      state.favs.addFav(state.singleItem.id);
+    }
+    view.toggleFav();
+    console.log(state.favs.favs);
   });
 }

@@ -81,3 +81,19 @@ export function renderCards(state) {
 export function cleanListingRow() {
   document.getElementById("cardsRow").innerHTML = "";
 }
+
+export function displayFavItems(array) {
+  let cards = document.querySelectorAll(".cards");
+  document.querySelectorAll(".card__like").forEach((card) => {
+    card.classList.remove("card__like--active");
+  });
+
+  cards.forEach((card) => {
+    for (let i = 0; i < array.length; i++) {
+      if (card.a.indexOf(array[i])) {
+        card.querySelector(".card__like").classList.add("card__like--active");
+        break;
+      }
+    }
+  });
+}
