@@ -98,7 +98,7 @@ export function render(data) {
                 </div>
 
                 <div class="container">
-                    <a href="/" class="back-to-results"
+                    <a href="#/" class="back-to-results"
                         >← Вернуться к результатам поиска</a
                     >
                 </div>

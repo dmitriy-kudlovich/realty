@@ -1,6 +1,6 @@
 import "url-search-params-polyfill";
 
-export function render(state) {
+export async function render(state) {
   const params = state.filterModel.params;
   const objects = state.filterModel.objects;
   let markup = "";
@@ -108,9 +108,40 @@ export function render(state) {
 </form>`;
 
   document.querySelector("#app").insertAdjacentHTML("afterbegin", markup);
+
+  if (localStorage.getItem("filter") != null) {
+    document.getElementById("selectComplex").value =
+      state.filterModel.filterParams.complex;
+
+    Array.from(document.getElementsByClassName("rooms__checkbox")).forEach(
+      (elem) => {
+        for (
+          let i = 0;
+          i < state.filterModel.filterParams.roomsChecked.length;
+          i++
+        ) {
+          if (
+            state.filterModel.filterParams.roomsChecked.indexOf(elem.value) !=
+            -1
+          ) {
+            elem.checked = true;
+          }
+        }
+      }
+    );
+
+    const rangeInputs = Array.from(
+      document.getElementsByClassName("range__input")
+    );
+
+    rangeInputs[0].value = state.filterModel.filterParams.sqmin;
+    rangeInputs[1].value = state.filterModel.filterParams.sqmax;
+    rangeInputs[2].value = state.filterModel.filterParams.pricemin;
+    rangeInputs[3].value = state.filterModel.filterParams.pricemax;
+  }
 }
 
-export function getInput() {
+export function getInput(state) {
   const elements = {
     formFilter: document.getElementById("formFilter"),
     selectComplex: document.getElementById("selectComplex"),
@@ -141,6 +172,14 @@ export function getInput() {
   query.append("sqmax", rangeInputsValues[1].value);
   query.append("pricemin", rangeInputsValues[2].value);
   query.append("pricemax", rangeInputsValues[3].value);
+
+  // For saving filter params
+  state.filterModel.filterParams.complex = elements.selectComplex.value;
+  state.filterModel.filterParams.roomsChecked = roomsChecked;
+  state.filterModel.filterParams.sqmin = rangeInputsValues[0].value;
+  state.filterModel.filterParams.sqmax = rangeInputsValues[1].value;
+  state.filterModel.filterParams.pricemin = rangeInputsValues[2].value;
+  state.filterModel.filterParams.pricemax = rangeInputsValues[3].value;
 
   if (query.toString()) {
     return `?${query}`;

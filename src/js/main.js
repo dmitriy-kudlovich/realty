@@ -12,8 +12,6 @@ const state = {
   favs: new FavsModel(),
 };
 
-window.state = state;
-
 const routerPages = [
   { path: "/", component: homePage },
   { path: "singleItem", component: singleItemPage },
@@ -21,6 +19,8 @@ const routerPages = [
   { path: "favourites", component: favouritesPage },
   { path: "error", component: errorPage },
 ];
+
+window.state = state;
 
 function getCurrentPage(path) {
   return routerPages.find((elem) => {

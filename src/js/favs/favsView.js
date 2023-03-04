@@ -3,34 +3,7 @@ export function render() {
                     <div class="heading-1">Избранное</div>
                 </div>
 
-                <div class="view-options-wrapper">
-                    <div class="container p-0">
-                        <!-- view-options -->
-                        <div class="view-options">
-                            <div class="view-options__sort">
-                                <label
-                                    for="sort-cards-by"
-                                    class="view-options__label"
-                                    >Сортировать</label
-                                >
-                                <select
-                                    id="sort-cards-by"
-                                    name=""
-                                    id=""
-                                    class="view-options__select"
-                                >
-                                    <option value="">по цене ↑</option>
-                                    <option value="">по цене ↓</option>
-                                    <option value="">по площади ↑</option>
-                                    <option value="">по площади ↓</option>
-                                </select>
-                            </div>
-                        </div>
-                        <!-- // view-options -->
-                    </div>
-                </div>
-
-                <div class="cards-wrapper">
+                <div class="cards-wrapper pt-5">
                     <div class="container p-0">
                         <div class="row">
                         </div>
@@ -43,7 +16,6 @@ export function render() {
 
 export function renderCards(data) {
   let cardMarkup = "";
-  console.log(data);
   data.forEach((card) => {
     cardMarkup += `<article class="col-md-4">
                         <!-- card -->
@@ -52,7 +24,7 @@ export function renderCards(data) {
                                 <div class="card__title">
                                     ${card.complex_name}
                                 </div>
-                                <div class="card__like p-1">
+                                <div class="card__like card__like--active p-1">
                                     <i class="fas fa-heart"></i>
                                 </div>
                             </div>
@@ -87,7 +59,7 @@ export function renderCards(data) {
                                         <div class="params__definition">
                                             Площадь
                                         </div>
-                                        <div class="params__value">${
+                                        <div class="params__value sqr__value">${
                                           card.square
                                         }</div>
                                     </div>

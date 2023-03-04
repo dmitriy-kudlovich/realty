@@ -4,7 +4,7 @@ import * as view from "./singleItemView";
 export default async function (state) {
   state.singleItem = new Model(state.routeParams);
   await state.singleItem.getItem();
-  await view.render(state.singleItem.result);
+  view.render(state.singleItem.result);
 
   view.displayFav(state.favs.favs, state.singleItem.id);
 
@@ -41,6 +41,5 @@ export default async function (state) {
       state.favs.addFav(state.singleItem.id);
     }
     view.toggleFav();
-    console.log(state.favs.favs);
   });
 }

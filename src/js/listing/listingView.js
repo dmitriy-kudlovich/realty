@@ -1,20 +1,19 @@
-export function listingRender(state) {
+export function listingRender() {
   const markup = `<div class="cards-wrapper">
-                    <div class="container p-0">
-                        <!-- row -->
-                        <div class="row pt-5" id="cardsRow">
-                        </div>
-                        <!-- // row -->
-                    </div>
-                </div>`;
+                      <div class="container p-0">
+                          <!-- row -->
+                          <div class="row pt-5" id="cardsRow">
+                          </div>
+                          <!-- // row -->
+                      </div>
+                  </div>`;
 
   document.getElementById("app").insertAdjacentHTML("beforeend", markup);
 }
 
-export function renderCards(state) {
+export function renderCards(data) {
   let cardMarkup = "";
-
-  state.results.forEach((card) => {
+  data.forEach((card) => {
     cardMarkup += `<article class="col-md-4">
                         <!-- card -->
                         <a href="#/singleItem/${card.id}" class="card">

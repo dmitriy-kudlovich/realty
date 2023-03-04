@@ -1,6 +1,7 @@
 export default class FilterModel {
   constructor() {
     this.query = "";
+    this.filterParams = this.getFilterParams();
   }
 
   async getParams() {
@@ -20,9 +21,27 @@ export default class FilterModel {
       const response = await fetch(queryString);
       const data = await response.json();
       this.objects = await data;
-      return this.objects;
     } catch (error) {
       alert(error);
+    }
+  }
+
+  saveFilterParams() {
+    localStorage.setItem("filter", JSON.stringify(this.filterParams));
+  }
+
+  getFilterParams() {
+    if (localStorage.getItem("filter") != null) {
+      return JSON.parse(localStorage.getItem("filter"));
+    } else {
+      return {
+        complex: "",
+        roomsChecked: [],
+        sqmin: "",
+        sqmax: "",
+        pricemin: "",
+        pricemax: "",
+      };
     }
   }
 }
