@@ -20,8 +20,6 @@ const routerPages = [
   { path: "error", component: errorPage },
 ];
 
-window.state = state;
-
 function getCurrentPage(path) {
   return routerPages.find((elem) => {
     return elem.path === path;

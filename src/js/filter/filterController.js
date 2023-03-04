@@ -23,8 +23,8 @@ export default async function (state) {
   form.addEventListener("reset", async () => {
     state.filterModel.query = "";
     await state.filterModel.getObjects();
+    localStorage.removeItem("filter");
     View.showObjectsAmount(state.filterModel.objects);
-    state.filterModel.saveFilterParams();
   });
 
   form.addEventListener("submit", async (e) => {
@@ -33,11 +33,11 @@ export default async function (state) {
     state.results = await state.filterModel.getObjects();
   });
 
-  async function renderAfterChange(state) {
+  async function renderAfterChange() {
     state.filterModel.query = View.getInput(state);
     await state.filterModel.getObjects();
+    state.results = await state.filterModel.objects;
+    await state.filterModel.saveFilterParams();
     View.showObjectsAmount(state.filterModel.objects);
-    state.results = state.filterModel.objects;
-    state.filterModel.saveFilterParams();
   }
 }
