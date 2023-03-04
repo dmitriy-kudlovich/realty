@@ -1,6 +1,9 @@
+import Filter from "../filter/filterModel";
 import * as View from "./listingView";
 
 export default async function (state) {
+  const filter = new Filter();
+  await filter.getObjects();
   View.listingRender();
   View.renderCards(state.filterModel.objects);
   View.displayFavItems(state.favs.favs);
