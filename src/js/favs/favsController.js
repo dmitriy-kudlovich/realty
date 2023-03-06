@@ -1,7 +1,7 @@
 import FavsModel from "./favsModel";
 import * as View from "./favsView";
 
-export default async function () {
+export default async function (state) {
   const favsModel = new FavsModel();
 
   await favsModel.getfavCards();
@@ -16,7 +16,10 @@ export default async function () {
       e.preventDefault();
       const urlArr = e.target.closest("a").href.split("/");
       favsModel.removeFav(urlArr[urlArr.length - 1]);
+      await state.favs.removeFav(urlArr[urlArr.length - 1]);
+
       await favsModel.getfavCards();
+
       document.querySelector(".row").innerHTML = View.renderCards(
         favsModel.favsCards
       );

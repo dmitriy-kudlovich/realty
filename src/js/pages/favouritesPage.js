@@ -1,5 +1,5 @@
 import controller from "../favs/favsController";
 
-export default function () {
-  controller();
+export default function (state) {
+  controller(state);
 }
